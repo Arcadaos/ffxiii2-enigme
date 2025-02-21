@@ -49,10 +49,11 @@ function App() {
   useEffect(() => {
     setLines([]);
     setStartCircle(null);
-  }, [numDials]);
+  }, [numDials, dialValues]);
 
   useEffect(() => {
-    if (result && result.length > 1) {
+    if (result && result.length > 1 && result !== "No valid path found") {
+      console.log(result)
       const newLines = [];
           for (let i = 0; i < result.length - 1; i++) {
             const start = dialPositions[result[i] as number];
@@ -138,6 +139,11 @@ function App() {
           </g>
         ))}
       </svg>
+      {result === "No valid path found" && (
+        <h2 style={{'color': '#FF4444'}}>
+          NO PATH FOUND
+        </h2>
+      )}
 
       <div className='relative w-96 h-96 mb-4'>
       </div>
